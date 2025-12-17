@@ -19,7 +19,7 @@ async function connectUsers() {
     console.log('supabase===========>', supabase);
     let { data: users, error } = await supabase
         .from('users')
-        .select('id')
+        .select('*')
     console.log('data====>', users);
 }
 export default connectUsers;
