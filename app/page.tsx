@@ -6,7 +6,8 @@ import createServerClient from '../lib/connect'
 export default function Home() {
 
   const connect = () => {
-    createServerClient()
+    const a = createServerClient()
+    console.log('===========>', a);
   }
   return (
     <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
