@@ -1,13 +1,17 @@
-import Image from "next/image";
+// import Image from "next/image";
+import createServerClient from '../lib/connect'
 
 export default function Home() {
-  console.log('SUPABASE_URL:', process.env.SUPABASE_URL)
-  console.log('NEXT_PUBLIC_SUPABASE_URL:', process.env.NEXT_PUBLIC_SUPABASE_URL)
-  console.log('SUPABASE_ANON_KEY:', process.env.SUPABASE_ANON_KEY)
-  console.log('NEXT_PUBLIC_SUPABASE_ANON_KEY', process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY)
+
+  const connect = () => {
+    createServerClient()
+  }
   return (
     <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
+      <button onClick={() => {
+        connect()
+      }}>connect supabase</button>
+      {/* <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
         <Image
           className="dark:invert"
           src="/next.svg"
@@ -63,7 +67,7 @@ export default function Home() {
             Documentation
           </a>
         </div>
-      </main>
+      </main> */}
     </div>
   );
 }
