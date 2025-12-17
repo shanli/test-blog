@@ -1,13 +1,13 @@
 'use client';
 
 // import Image from "next/image";
-import createServerClient from '../lib/connect'
+import connectUsers from '../lib/connect'
 
 export default function Home() {
 
-  const connect = () => {
-    const a = createServerClient()
-    console.log('===========>', a);
+  const connect = async () => {
+    const supabase = await connectUsers()
+    
   }
   return (
     <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">

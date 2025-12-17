@@ -1,5 +1,5 @@
 import { createClient } from "@supabase/supabase-js"
-export function createServerClient() {
+async function createServerClient() {
 //   const cookieStore = cookies()
 //   console.log('SUPABASE_URL:', process.env.SUPABASE_URL)
   console.log('NEXT_PUBLIC_SUPABASE_URL:', process.env.NEXT_PUBLIC_SUPABASE_URL)
@@ -13,4 +13,13 @@ export function createServerClient() {
     // },
   })
 }
-export default createServerClient;
+
+async function connectUsers() {
+    let supabase = await createServerClient()
+    console.log('supabase===========>', supabase);
+    let { data: users, error } = await supabase
+        .from('users')
+        .select('id')
+    console.log('data====>', users);
+}
+export default connectUsers;
