@@ -21,5 +21,9 @@ async function connectUsers() {
         .from('users')
         .select('*')
     console.log('data====>', users);
+    let { data: blogs, error: errror1 } = await supabase
+    .from('blogs')
+    .select('content')
+    console.log('data blogs====>', blogs);
 }
 export default connectUsers;
