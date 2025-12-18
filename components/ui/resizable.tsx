@@ -8,7 +8,9 @@ import { cn } from "@/lib/utils"
 const ResizablePanelGroup = ({
   className,
   ...props
+  // @ts-ignore
 }: React.ComponentProps<typeof ResizablePrimitive.PanelGroup>) => (
+  // @ts-ignore
   <ResizablePrimitive.PanelGroup
     className={cn(
       "flex h-full w-full data-[panel-group-direction=vertical]:flex-col",
