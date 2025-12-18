@@ -37,6 +37,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     // 初始化时检查用户状态
+    console.log('supabase====>', supabase);
     // @ts-ignore
     supabase.auth.getSession().then(({ data: { session } }) => {
       setUser(session?.user ?? null)
