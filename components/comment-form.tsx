@@ -7,7 +7,8 @@ import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
 import { useAuth } from "@/components/auth-provider"
 import { useToast } from "@/hooks/use-toast"
-import { getSupabaseClient } from "@/lib/supabase/client"
+// import { getSupabaseClient } from "@/lib/supabase/client"
+import { createServerClient } from '@/lib/connect'
 import type { Comment } from "@/types"
 
 interface CommentFormProps {
@@ -20,7 +21,7 @@ export function CommentForm({ postId, onCommentAdded }: CommentFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const { user } = useAuth()
   const { toast } = useToast()
-  const supabase = getSupabaseClient()
+  const supabase = createServerClient()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -46,8 +47,8 @@ export function CommentForm({ postId, onCommentAdded }: CommentFormProps) {
     setIsSubmitting(true)
 
     try {
-      const { data, error } = await supabase
-        .from("comments")
+      // @ts-ignore
+      const { data, error } = await supabase.from("comments")
         .insert([
           {
             post_id: postId,

@@ -3,7 +3,8 @@
 import { useState, useEffect } from "react"
 import { CommentItem } from "@/components/comment-item"
 import { CommentForm } from "@/components/comment-form"
-import { getSupabaseClient } from "@/lib/supabase/client"
+// import { getSupabaseClient } from "@/lib/supabase/client"
+import { createServerClient } from '@/lib/connect'
 import { useToast } from "@/hooks/use-toast"
 import type { Comment } from "@/types"
 import { Separator } from "@/components/ui/separator"
@@ -16,13 +17,13 @@ export function CommentsSection({ postId }: CommentsSectionProps) {
   const [comments, setComments] = useState<Comment[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const { toast } = useToast()
-  const supabase = getSupabaseClient()
+  const supabase = createServerClient()
 
   useEffect(() => {
     const fetchComments = async () => {
       try {
-        const { data, error } = await supabase
-          .from("comments")
+        // @ts-ignore
+        const { data, error } = await supabase.from("comments")
           .select(`
             *,
             user_profiles(id, username, display_name, avatar_url)
@@ -35,7 +36,7 @@ export function CommentsSection({ postId }: CommentsSectionProps) {
         }
 
         // 转换数据结构以匹配我们的类型
-        const formattedComments = data.map((comment) => ({
+        const formattedComments = data.map((comment: { user_profiles: any }) => ({
           ...comment,
           user: comment.user_profiles,
         }))
