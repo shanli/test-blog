@@ -14,7 +14,7 @@ export default function LoginLayout({
 }) {
   return <>
    <AuthProvider>
-        <section style={{'background': 'red'}}>{children}</section>
+        <section>{children}</section>
    </AuthProvider>
   </>
 }

@@ -55,7 +55,7 @@ export default function Login() {
         description: "欢迎回来！",
       })
 
-      router.push("/dashboard")
+      router.push("/")
     } catch (error) {
       toast({
         title: "登录失败",
