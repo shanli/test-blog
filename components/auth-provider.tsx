@@ -53,6 +53,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       console.log('supabase====>', supabase);
       // @ts-ignore
       supabase.auth.getSession().then(({ data: { session } }) => {
+        console.log('session===>', session)
         setUser(session?.user ?? null)
         setLoading(false)
       })
