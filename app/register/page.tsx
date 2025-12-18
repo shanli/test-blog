@@ -99,27 +99,13 @@ export default function Register() {
         </CardHeader>
 
         <CardContent className="space-y-4">
-          <Button
-            variant="outline"
-            className="w-full flex items-center justify-center gap-2"
-            onClick={handleGitHubLogin}
-            disabled={isGitHubLoading}
-          >
-            {isGitHubLoading ? (
-              <div className="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
-            ) : (
-              <Github className="h-4 w-4" />
-            )}
-            使用 GitHub 注册
-          </Button>
+          
 
           <div className="relative">
             <div className="absolute inset-0 flex items-center">
               <span className="w-full border-t" />
             </div>
-            <div className="relative flex justify-center text-xs uppercase">
-              <span className="bg-background px-2 text-muted-foreground">或使用邮箱注册</span>
-            </div>
+            
           </div>
 
           <form onSubmit={handleSubmit}>
