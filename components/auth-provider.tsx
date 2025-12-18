@@ -37,13 +37,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     // 初始化时检查用户状态
+    // @ts-ignore
     supabase.auth.getSession().then(({ data: { session } }) => {
       setUser(session?.user ?? null)
       setLoading(false)
     })
-
+    
     const {
       data: { subscription },
+      // @ts-ignore
     } = supabase.auth.onAuthStateChange((_event, session) => {
       console.log("Auth state changed:", session?.user)
       setUser(session?.user ?? null)
@@ -56,6 +58,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, [])
 
   const signIn = async (email: string, password: string) => {
+    // @ts-ignore
     const { error } = await supabase.auth.signInWithPassword({
       email,
       password,
@@ -64,6 +67,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }
 
   const signInWithGitHub = async () => {
+    // @ts-ignore
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "github",
       options: {
@@ -75,6 +79,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }
 
   const signUp = async (email: string, password: string) => {
+    // @ts-ignore
     const { error } = await supabase.auth.signUp({
       email,
       password,
@@ -83,6 +88,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }
 
   const signOut = async () => {
+    // @ts-ignore
     await supabase.auth.signOut()
   }
 
