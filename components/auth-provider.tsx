@@ -33,35 +33,44 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
 
 
-export function AuthProvider({ children, supabase }: { children: React.ReactNode, supabase: any }) {
+export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null)
   const [loading, setLoading] = useState(true)
-  
-  // @ts-ignore
-  useEffect(async () => {
-    // 初始化时检查用户状态
-    
-    // const supabase = await createServerClient()
-    console.log('supabase====>', supabase);
-    // @ts-ignore
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setUser(session?.user ?? null)
-      setLoading(false)
-    })
-    
-    const {
-      data: { subscription },
-      // @ts-ignore
-    } = supabase.auth.onAuthStateChange((_event, session) => {
-      console.log("Auth state changed:", session?.user)
-      setUser(session?.user ?? null)
-      setLoading(false)
-    })
-
-    return () => {
-      subscription.unsubscribe()
+  const [supabase, setSupabase] = useState<any>(null);
+  useEffect(() => {
+    const getSupabase = async () => {
+      console.log('111111111')
+      const supa = await createServerClient();
+      console.log('supa', supa)
+      setSupabase(supa)
     }
-  }, [])
+    getSupabase()
+  },[])
+  // @ts-ignore
+  useEffect(() => {
+    if (supabase) {
+      // 初始化时检查用户状态
+      console.log('supabase====>', supabase);
+      // @ts-ignore
+      supabase.auth.getSession().then(({ data: { session } }) => {
+        setUser(session?.user ?? null)
+        setLoading(false)
+      })
+      
+      const {
+        data: { subscription },
+        // @ts-ignore
+      } = supabase.auth.onAuthStateChange((_event, session) => {
+        console.log("Auth state changed:", session?.user)
+        setUser(session?.user ?? null)
+        setLoading(false)
+      })
+
+      return () => {
+        subscription.unsubscribe()
+      }
+    }
+  }, [supabase])
 
   const signIn = async (email: string, password: string) => {
     // @ts-ignore
