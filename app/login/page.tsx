@@ -100,26 +100,10 @@ export default function Login() {
         </CardHeader>
 
         <CardContent className="space-y-4">
-          <Button
-            variant="outline"
-            className="w-full flex items-center justify-center gap-2"
-            onClick={handleGitHubLogin}
-            disabled={isGitHubLoading}
-          >
-            {isGitHubLoading ? (
-              <div className="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
-            ) : (
-              <Github className="h-4 w-4" />
-            )}
-            使用 GitHub 登录 (需要获取邮箱权限)
-          </Button>
-
+          
           <div className="relative">
             <div className="absolute inset-0 flex items-center">
               <span className="w-full border-t" />
-            </div>
-            <div className="relative flex justify-center text-xs uppercase">
-              <span className="bg-background px-2 text-muted-foreground">或使用邮箱登录</span>
             </div>
           </div>
 
