@@ -1,5 +1,5 @@
 import { createClient } from "@supabase/supabase-js"
-async function createServerClient() {
+export async function createServerClient() {
 //   const cookieStore = cookies()
 //   console.log('SUPABASE_URL:', process.env.SUPABASE_URL)
   console.log('NEXT_PUBLIC_SUPABASE_URL:', process.env.NEXT_PUBLIC_SUPABASE_URL)

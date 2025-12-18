@@ -1,0 +1,12 @@
+import { AuthProvider } from '@/components/auth-provider'
+export default function LoginLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  return <>
+   <AuthProvider>
+        <section style={{'background': 'red'}}>{children}</section>
+   </AuthProvider>
+  </>
+}
