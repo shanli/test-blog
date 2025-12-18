@@ -6,7 +6,7 @@ import { createContext, useContext, useEffect, useState } from "react"
 // import { getSupabaseClient } from "@/lib/supabase/client"
 import { createServerClient } from '@/lib/connect'
 import type { User } from "@supabase/supabase-js"
-import type { InferGetStaticPropsType, GetStaticProps } from 'next'
+import type { InferGetStaticPropsType } from 'next'
 
 type AuthContextType = {
   user: User | null
@@ -31,12 +31,9 @@ type AuthContextType = {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
-export const getStaticProps = (async () => {
-  const supabase = await createServerClient()
-  return { props: { supabase } }
-}) satisfies GetStaticProps<any>
 
-export function AuthProvider({ children, supabase }: { children: React.ReactNode, supabase: InferGetStaticPropsType<typeof getStaticProps> }) {
+
+export function AuthProvider({ children, supabase }: { children: React.ReactNode, supabase: any }) {
   const [user, setUser] = useState<User | null>(null)
   const [loading, setLoading] = useState(true)
   
