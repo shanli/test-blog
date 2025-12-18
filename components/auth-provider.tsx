@@ -30,16 +30,17 @@ type AuthContextType = {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
-export async function AuthProvider({ children }: { children: React.ReactNode }) {
+export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null)
   const [loading, setLoading] = useState(true)
-  const supabase = await createServerClient()
+  const supabase = createServerClient()
 
   useEffect(() => {
     // 初始化时检查用户状态
-    console.log('supabase====>', supabase);
     // @ts-ignore
-    supabase.auth.getSession().then(({ data: { session } }) => {
+    const supa = await supabase;
+    console.log('supa====>', supa);
+    supa.auth.getSession().then(({ data: { session } }) => {
       setUser(session?.user ?? null)
       setLoading(false)
     })
@@ -47,7 +48,7 @@ export async function AuthProvider({ children }: { children: React.ReactNode }) 
     const {
       data: { subscription },
       // @ts-ignore
-    } = supabase.auth.onAuthStateChange((_event, session) => {
+    } = supa.auth.onAuthStateChange((_event, session) => {
       console.log("Auth state changed:", session?.user)
       setUser(session?.user ?? null)
       setLoading(false)
@@ -80,8 +81,9 @@ export async function AuthProvider({ children }: { children: React.ReactNode }) 
   }
 
   const signUp = async (email: string, password: string) => {
+    const supa = await supabase;
     // @ts-ignore
-    const { error } = await supabase.auth.signUp({
+    const { error } = await supa.auth.signUp({
       email,
       password,
     })
