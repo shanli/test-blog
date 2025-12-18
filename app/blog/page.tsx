@@ -30,7 +30,17 @@ export default function Dashboard() {
   const { user } = useAuth()
   const router = useRouter()
   const { toast } = useToast()
-  const supabase = createServerClient()
+  // const supabase = createServerClient()
+  const [supabase, setSupabase] = useState<any>(null);
+  useEffect(() => {
+    const getSupabase = async () => {
+      console.log('111111111')
+      const supa = await createServerClient();
+      console.log('supa', supa)
+      setSupabase(supa)
+    }
+    getSupabase()
+  },[])
 
   useEffect(() => {
     if (!user) {
