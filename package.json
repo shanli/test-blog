@@ -9,7 +9,6 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "@radix-ui/react-label": "^2.1.8",
     "@radix-ui/react-accordion": "latest",
     "@radix-ui/react-alert-dialog": "latest",
     "@radix-ui/react-aspect-ratio": "latest",
@@ -20,6 +19,7 @@
     "@radix-ui/react-dialog": "latest",
     "@radix-ui/react-dropdown-menu": "latest",
     "@radix-ui/react-hover-card": "latest",
+    "@radix-ui/react-label": "^2.1.8",
     "@radix-ui/react-menubar": "latest",
     "@radix-ui/react-navigation-menu": "latest",
     "@radix-ui/react-popover": "latest",
@@ -53,7 +53,9 @@
     "next": "16.0.10",
     "next-themes": "^0.4.6",
     "react": "19.2.0",
+    "react-day-picker": "^9.12.0",
     "react-dom": "19.2.0",
+    "react-hook-form": "^7.68.0",
     "tailwind-merge": "^3.4.0"
   },
   "devDependencies": {
