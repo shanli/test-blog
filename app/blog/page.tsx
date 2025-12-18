@@ -47,6 +47,10 @@ export default function Dashboard() {
       router.push("/login")
       return
     }
+     if (!supabase) {
+      // router.push("/login")
+      return
+    }
 
     const fetchPosts = async () => {
       try {
@@ -76,7 +80,7 @@ export default function Dashboard() {
     }
 
     fetchPosts()
-  }, [user, router, toast])
+  }, [user,supabase, router, toast])
 
   const togglePublishStatus = async (post: Post) => {
     try {
