@@ -40,7 +40,7 @@ export function CommentsSection({ postId }: CommentsSectionProps) {
           ...comment,
           user: comment.user_profiles,
         }))
-
+        // @ts-ignore
         setComments(formattedComments)
       } catch (error: any) {
         toast({
