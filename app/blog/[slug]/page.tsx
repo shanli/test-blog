@@ -51,15 +51,15 @@ async function getCurrentUser() {
 export default async function BlogPost({ params }: { params: { slug: string } }) {
 
   // const { user, supabase } = useAuth()
-  const post = await getPostBySlug(params.slug)
-  const currentUser = await getCurrentUser()
+  const post = {title: 'ddd', content:'ddddd', created_at: 'ddd',is_public: true, id: 11 }//await getPostBySlug(params.slug)
+  // const currentUser = await getCurrentUser()
 
   if (!post) {
     notFound()
   }
 
   // 如果文章不是公开的，并且用户未登录，则显示 404
-  if (!post.is_public && !currentUser) {
+  if (!post.is_public) {
     notFound()
   }
 
