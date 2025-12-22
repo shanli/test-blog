@@ -3,10 +3,9 @@ import { ArrowLeft } from "lucide-react"
 import { createServerClient } from "@/lib/connect"
 import type { Post } from "@/types"
 import { formatDate } from "@/lib/utils"
-import { notFound } from "next/navigation"
+import { notFound, useParams } from "next/navigation"
 import { CommentsSection } from "@/components/comments-section"
 import { EnhancedContent } from "@/components/enhanced-content"
-import { useParams } from 'next/navigation'
 
 export const revalidate = 60 // 每分钟重新验证页面
 
@@ -50,8 +49,9 @@ async function getCurrentUser() {
 }
 
 export default async function BlogPost({ params }: { params: { slug: string | undefined } }) {
-  const {slug} = useParams() as any;
+  // const {slug} = useParams() as any;
   // const { user, supabase } = useAuth()
+  const slug = (await params).slug as any;
   const post = await getPostBySlug(slug)
   // const currentUser = await getCurrentUser()
 
