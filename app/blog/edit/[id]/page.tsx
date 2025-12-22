@@ -12,7 +12,7 @@ import Link from "next/link"
 import { useAuth } from "@/components/auth-provider"
 import { useRouter } from "next/navigation"
 import { useToast } from "@/hooks/use-toast"
-import { getSupabaseClient } from "@/lib/supabase/client"
+import { createServerClient } from "@/lib/connect"
 import { Checkbox } from "@/components/ui/checkbox"
 import { RichTextEditor } from "@/components/rich-text-editor"
 import type { Post, Category } from "@/types"
@@ -34,7 +34,7 @@ export default function EditBlogPost({ params }: { params: { id: string } }) {
   const { user } = useAuth()
   const router = useRouter()
   const { toast } = useToast()
-  const supabase = getSupabaseClient()
+  const supabase = createServerClient()
 
   useEffect(() => {
     if (!user) {
