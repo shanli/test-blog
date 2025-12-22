@@ -49,50 +49,46 @@ async function getCurrentUser() {
 }
 
 export default async function BlogPost({ params }: { params: { slug: string } }) {
-  return (
-    <>
-    <div>hhhhh</div>
-    </>
-  )
+
   // const { user, supabase } = useAuth()
-  // // const post = await getPostBySlug(params.slug)
-  // // const currentUser = await getCurrentUser()
+  const post = await getPostBySlug(params.slug)
+  const currentUser = await getCurrentUser()
 
-  // // if (!post) {
-  // //   notFound()
-  // // }
+  if (!post) {
+    notFound()
+  }
 
-  // // // 如果文章不是公开的，并且用户未登录，则显示 404
-  // // if (!post.is_public && !currentUser) {
-  // //   notFound()
-  // // }
+  // 如果文章不是公开的，并且用户未登录，则显示 404
+  if (!post.is_public && !currentUser) {
+    notFound()
+  }
 
-  // // const author = post.author?.display_name || post.author?.username || "未知作者"
+  const author = post.author?.display_name || post.author?.username || "未知作者"
 
-  // // return (
-  // //   <div className="container mx-auto px-4 py-8">
-  // //     <Link href="/" className="inline-flex items-center text-muted-foreground hover:text-foreground mb-6">
-  // //       <ArrowLeft className="mr-2 h-4 w-4" />
-  // //       返回首页
-  // //     </Link>
+  return (
+    <div className="container mx-auto px-4 py-8">
+      <Link href="/" className="inline-flex items-center text-muted-foreground hover:text-foreground mb-6">
+        <ArrowLeft className="mr-2 h-4 w-4" />
+        返回首页
+      </Link>
 
-  // //     <article className="max-w-3xl mx-auto">
-  // //       <header className="mb-8">
-  // //         <h1 className="text-3xl font-bold mb-4">{post.title}</h1>
-  // //         <div className="text-muted-foreground">
-  // //           {formatDate(post.created_at)} · {author}
-  // //           {!post.is_public && (
-  // //             <span className="ml-2 inline-flex items-center rounded-full bg-yellow-100 px-2.5 py-0.5 text-xs font-medium text-yellow-800">
-  // //               私有文章
-  // //             </span>
-  // //           )}
-  // //         </div>
-  // //       </header>
+      <article className="max-w-3xl mx-auto">
+        <header className="mb-8">
+          <h1 className="text-3xl font-bold mb-4">{post.title}</h1>
+          <div className="text-muted-foreground">
+            {formatDate(post.created_at)} · {author}
+            {!post.is_public && (
+              <span className="ml-2 inline-flex items-center rounded-full bg-yellow-100 px-2.5 py-0.5 text-xs font-medium text-yellow-800">
+                私有文章
+              </span>
+            )}
+          </div>
+        </header>
 
-  // //       <EnhancedContent content={post.content} />
+        <EnhancedContent content={post.content} />
 
-  // //       <CommentsSection postId={post.id} />
-  // //     </article>
-  // //   </div>
-  // )
+        <CommentsSection postId={post.id} />
+      </article>
+    </div>
+  )
 }
