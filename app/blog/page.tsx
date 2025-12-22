@@ -30,18 +30,7 @@ export default function Blog() {
   const { user, supabase } = useAuth()
   const router = useRouter()
   const { toast } = useToast()
-  // const supabase = createServerClient()
-  // const [supabase, setSupabase] = useState<any>(null);
-  // useEffect(() => {
-  //   console.log('222222')
-  //   const getSupabase = async () => {
-  //     console.log('111111111')
-  //     const supa = await createServerClient();
-  //     console.log('supa', supa)
-  //     setSupabase(supa)
-  //   }
-  //   getSupabase()
-  // }, [])
+
 
   useEffect(() => {
     if (!user) {
@@ -49,11 +38,6 @@ export default function Blog() {
       // router.push("/login")
       return
     }
-    //  if (!supabase) {
-    //   console.log('123344444')
-    //   // router.push("/login")
-    //   return
-    // }
 
     const fetchPosts = async () => {
       try {
@@ -83,7 +67,7 @@ export default function Blog() {
     }
 
     fetchPosts()
-  }, [user, supabase, router, toast])
+  }, [user, router, toast])
 
   const togglePublishStatus = async (post: Post) => {
     try {
@@ -178,7 +162,105 @@ export default function Blog() {
           <CardTitle>文章管理</CardTitle>
           <CardDescription>管理您的所有博客文章</CardDescription>
         </CardHeader>
-       
+        <CardContent>
+          {posts.length === 0 ? (
+            <div className="text-center py-12">
+              <p className="text-muted-foreground mb-4">您还没有创建任何文章</p>
+              <Link href="/blog/create">
+                <Button>创建第一篇文章</Button>
+              </Link>
+            </div>
+          ) : (
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>标题</TableHead>
+                  <TableHead>状态</TableHead>
+                  <TableHead>可见性</TableHead>
+                  <TableHead>创建日期</TableHead>
+                  <TableHead className="text-right">操作</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {posts.map((post) => (
+                  <TableRow key={post.id}>
+                    <TableCell className="font-medium">{post.title}</TableCell>
+                    <TableCell>
+                      {post.published ? (
+                        <span className="inline-flex items-center rounded-full bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-800">
+                          已发布
+                        </span>
+                      ) : (
+                        <span className="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">
+                          草稿
+                        </span>
+                      )}
+                    </TableCell>
+                    <TableCell>
+                      {post.is_public ? (
+                        <span className="inline-flex items-center rounded-full bg-blue-100 px-2.5 py-0.5 text-xs font-medium text-blue-800">
+                          公开
+                        </span>
+                      ) : (
+                        <span className="inline-flex items-center rounded-full bg-yellow-100 px-2.5 py-0.5 text-xs font-medium text-yellow-800">
+                          私有
+                        </span>
+                      )}
+                    </TableCell>
+                    <TableCell>{formatDate(post.created_at)}</TableCell>
+                    <TableCell className="text-right">
+                      <div className="flex justify-end gap-2">
+                        <Button
+                          variant="outline"
+                          size="icon"
+                          onClick={() => togglePublishStatus(post)}
+                          title={post.published ? "设为草稿" : "发布"}
+                        >
+                          {post.published ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                        </Button>
+                        <Button
+                          variant="outline"
+                          size="icon"
+                          onClick={() => toggleVisibilityStatus(post)}
+                          title={post.is_public ? "设为私有" : "设为公开"}
+                        >
+                          {post.is_public ? <Globe className="h-4 w-4" /> : <Lock className="h-4 w-4" />}
+                        </Button>
+                        <Button variant="outline" size="icon" asChild>
+                          <Link href={`/blog/edit/${post.id}`}>
+                            <Edit className="h-4 w-4" />
+                          </Link>
+                        </Button>
+                        <AlertDialog>
+                          <AlertDialogTrigger asChild>
+                            <Button variant="outline" size="icon" className="text-red-500">
+                              <Trash2 className="h-4 w-4" />
+                            </Button>
+                          </AlertDialogTrigger>
+                          <AlertDialogContent>
+                            <AlertDialogHeader>
+                              <AlertDialogTitle>确认删除</AlertDialogTitle>
+                              <AlertDialogDescription>您确定要删除这篇文章吗？此操作无法撤销。</AlertDialogDescription>
+                            </AlertDialogHeader>
+                            <AlertDialogFooter>
+                              <AlertDialogCancel>取消</AlertDialogCancel>
+                              <AlertDialogAction
+                                onClick={() => deletePost(post.id)}
+                                className="bg-red-500 hover:bg-red-600"
+                              >
+                                删除
+                              </AlertDialogAction>
+                            </AlertDialogFooter>
+                          </AlertDialogContent>
+                        </AlertDialog>
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          )}
+        </CardContent>
       </Card>
     </div>
   )
