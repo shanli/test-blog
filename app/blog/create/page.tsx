@@ -212,7 +212,7 @@ export default function CreateBlogPost() {
               />
             </div>
 
-            <div className="space-y-2">
+            {/* <div className="space-y-2">
               <Label>分类</Label>
               {loadingCategories ? (
                 <p className="text-sm text-muted-foreground">加载分类中...</p>
@@ -235,7 +235,7 @@ export default function CreateBlogPost() {
               ) : (
                 <p className="text-sm text-muted-foreground">暂无分类</p>
               )}
-            </div>
+            </div> */}
 
             <div className="flex items-center space-x-2">
               <Checkbox
