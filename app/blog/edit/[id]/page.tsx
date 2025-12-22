@@ -78,28 +78,28 @@ export default function EditBlogPost({ params }: { params: { id: string } }) {
         setVisibility(postData.is_public ? "public" : "private")
 
         // 获取分类
-        const { data: categoriesData, error: categoriesError } = await supabase
-          .from("categories")
-          .select("*")
-          .order("name", { ascending: true })
+        // const { data: categoriesData, error: categoriesError } = await supabase
+        //   .from("categories")
+        //   .select("*")
+        //   .order("name", { ascending: true })
 
-        if (categoriesError) {
-          throw categoriesError
-        }
+        // if (categoriesError) {
+        //   throw categoriesError
+        // }
 
-        setCategories(categoriesData as Category[])
+        // setCategories(categoriesData as Category[])
 
-        // 获取文章的分类
-        const { data: postCategoriesData, error: postCategoriesError } = await supabase
-          .from("post_categories")
-          .select("category_id")
-          .eq("post_id", params.id)
+        // // 获取文章的分类
+        // const { data: postCategoriesData, error: postCategoriesError } = await supabase
+        //   .from("post_categories")
+        //   .select("category_id")
+        //   .eq("post_id", params.id)
 
-        if (postCategoriesError) {
-          throw postCategoriesError
-        }
+        // if (postCategoriesError) {
+        //   throw postCategoriesError
+        // }
 
-        setSelectedCategories(postCategoriesData.map((pc) => pc.category_id))
+        // setSelectedCategories(postCategoriesData.map((pc) => pc.category_id))
       } catch (error: any) {
         toast({
           title: "获取文章失败",
@@ -150,26 +150,26 @@ export default function EditBlogPost({ params }: { params: { id: string } }) {
         throw updateError
       }
 
-      // 删除现有的分类关联
-      const { error: deleteError } = await supabase.from("post_categories").delete().eq("post_id", post.id)
+      // // 删除现有的分类关联
+      // const { error: deleteError } = await supabase.from("post_categories").delete().eq("post_id", post.id)
 
-      if (deleteError) {
-        throw deleteError
-      }
+      // if (deleteError) {
+      //   throw deleteError
+      // }
 
-      // 如果选择了分类，创建新的分类关联
-      if (selectedCategories.length > 0) {
-        const categoryRelations = selectedCategories.map((categoryId) => ({
-          post_id: post.id,
-          category_id: categoryId,
-        }))
+      // // 如果选择了分类，创建新的分类关联
+      // if (selectedCategories.length > 0) {
+      //   const categoryRelations = selectedCategories.map((categoryId) => ({
+      //     post_id: post.id,
+      //     category_id: categoryId,
+      //   }))
 
-        const { error: insertError } = await supabase.from("post_categories").insert(categoryRelations)
+      //   const { error: insertError } = await supabase.from("post_categories").insert(categoryRelations)
 
-        if (insertError) {
-          throw insertError
-        }
-      }
+      //   if (insertError) {
+      //     throw insertError
+      //   }
+      // }
 
       toast({
         title: "文章已更新",
@@ -259,7 +259,7 @@ export default function EditBlogPost({ params }: { params: { id: string } }) {
               />
             </div>
 
-            <div className="space-y-2">
+            {/* <div className="space-y-2">
               <Label>分类</Label>
               {categories.length > 0 ? (
                 <div className="grid grid-cols-2 gap-2">
@@ -280,7 +280,7 @@ export default function EditBlogPost({ params }: { params: { id: string } }) {
               ) : (
                 <p className="text-sm text-muted-foreground">暂无分类</p>
               )}
-            </div>
+            </div> */}
 
             <div className="flex items-center space-x-2">
               <Checkbox
