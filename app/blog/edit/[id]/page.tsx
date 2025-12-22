@@ -193,15 +193,15 @@ export default function EditBlogPost({ params }: { params: { id: string } }) {
     }
   }
 
-  const handleCategoryChange = (categoryId: string) => {
-    setSelectedCategories((prev) => {
-      if (prev.includes(categoryId)) {
-        return prev.filter((id) => id !== categoryId)
-      } else {
-        return [...prev, categoryId]
-      }
-    })
-  }
+  // const handleCategoryChange = (categoryId: string) => {
+  //   setSelectedCategories((prev) => {
+  //     if (prev.includes(categoryId)) {
+  //       return prev.filter((id) => id !== categoryId)
+  //     } else {
+  //       return [...prev, categoryId]
+  //     }
+  //   })
+  // }
 
   if (isLoading) {
     return (
