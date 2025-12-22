@@ -10,7 +10,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import Link from "next/link"
 import { useAuth } from "@/components/auth-provider"
-import { useRouter } from "next/navigation"
+import { useParams, useRouter } from "next/navigation"
 import { useToast } from "@/hooks/use-toast"
 import { createServerClient } from "@/lib/connect"
 import { Checkbox } from "@/components/ui/checkbox"
@@ -18,6 +18,7 @@ import { RichTextEditor } from "@/components/rich-text-editor"
 import type { Post, Category } from "@/types"
 import { notFound } from "next/navigation"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
+// import { useParams } from 'next/navigation'
 
 export default function EditBlogPost({ params }: { params: { id: string } }) {
   // return (
@@ -33,6 +34,8 @@ export default function EditBlogPost({ params }: { params: { id: string } }) {
   const [visibility, setVisibility] = useState<"private" | "public">("private")
   const [isLoading, setIsLoading] = useState(true)
   const [isSubmitting, setIsSubmitting] = useState(false)
+  // const [id, setId] = useParams()
+  const { id } = useParams()
   // const [categories, setCategories] = useState<Category[]>([])
   // const [selectedCategories, setSelectedCategories] = useState<string[]>([])
 
@@ -53,7 +56,7 @@ export default function EditBlogPost({ params }: { params: { id: string } }) {
         const { data: postData, error: postError } = await supabase
           .from("posts")
           .select("*")
-          .eq("id", params.id)
+          .eq("id", id)
           .single()
         console.log('postData=================>', postData);
         if (postError) {
@@ -113,7 +116,7 @@ export default function EditBlogPost({ params }: { params: { id: string } }) {
     }
 
     fetchPost()
-  }, [params.id, user, router, toast])
+  }, [id, user, router, toast])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
