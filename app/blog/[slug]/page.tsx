@@ -53,6 +53,8 @@ export default async function BlogPost({ params }: { params: { slug: string | un
   // const {slug} = useParams() as any;
   // const { user, supabase } = useAuth()
   // const slug = (await params).slug as any;
+  const res = await params;
+  console.log('res===========>',res);
   const slug = 'test2-315126';
   const post = await getPostBySlug(slug)
   const currentUser = await getCurrentUser()
