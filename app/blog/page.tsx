@@ -24,7 +24,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
 
-export default function Dashboard() {
+export default function Blog() {
   const [posts, setPosts] = useState<Post[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const { user } = useAuth()
@@ -33,6 +33,7 @@ export default function Dashboard() {
   // const supabase = createServerClient()
   const [supabase, setSupabase] = useState<any>(null);
   useEffect(() => {
+    console.log('222222')
     const getSupabase = async () => {
       console.log('111111111')
       const supa = await createServerClient();
@@ -40,14 +41,16 @@ export default function Dashboard() {
       setSupabase(supa)
     }
     getSupabase()
-  },[])
+  }, [])
 
   useEffect(() => {
     if (!user) {
+      console.log('123344444')
       router.push("/login")
       return
     }
      if (!supabase) {
+      console.log('123344444')
       // router.push("/login")
       return
     }
@@ -80,7 +83,7 @@ export default function Dashboard() {
     }
 
     fetchPosts()
-  }, [user,supabase, router, toast])
+  }, [user, supabase, router, toast])
 
   const togglePublishStatus = async (post: Post) => {
     try {
