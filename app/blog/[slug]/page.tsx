@@ -51,7 +51,7 @@ async function getCurrentUser() {
 export default async function BlogPost({ params }: { params: { slug: string } }) {
 
   // const { user, supabase } = useAuth()
-  const post = {title: 'ddd', content:'ddddd', created_at: '2025-12-22T05:11:57.421487+00:00',is_public: true, id: '11' }//await getPostBySlug(params.slug)
+  const post = await getPostBySlug(params.slug)
   // const currentUser = await getCurrentUser()
 
   if (!post) {
