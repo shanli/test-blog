@@ -40,7 +40,7 @@ export default function EditBlogPost({ params }: { params: { id: string } }) {
   const router = useRouter()
   const { toast } = useToast()
   // const supabase = createServerClient()
-  console.log('params===========>', params.id)
+  // console.log('params===========>', params.id)
   useEffect(() => {
     if (!user) {
       router.push("/login")
@@ -55,7 +55,7 @@ export default function EditBlogPost({ params }: { params: { id: string } }) {
           .select("*")
           .eq("id", params.id)
           .single()
-
+        console.log('postData=================>', postData);
         if (postError) {
           throw postError
         }
