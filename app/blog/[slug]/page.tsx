@@ -14,7 +14,7 @@ async function getPostBySlug(slug: string) {
   console.log('supabase======>', supabase);
 
   // 首先获取文章
-  const { data: post, error } = await supabase.from("posts").select("*").eq("slug", slug).single()//.eq("published", true).single() // 
+  const { data: post, error } = await supabase.from("posts").select("*").eq("slug", slug).eq("published", true).single()//.eq("published", true).single() // 
   console.log('post======>', post);
   if (error) {
     console.error("Error fetching post:", error)
