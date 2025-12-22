@@ -51,7 +51,8 @@ async function getCurrentUser() {
 export default async function BlogPost({ params }: { params: { slug: string | undefined } }) {
   // const {slug} = useParams() as any;
   // const { user, supabase } = useAuth()
-  const slug = (await params).slug as any;
+  // const slug = (await params).slug as any;
+  const slug = 'test3-615854';
   const post = await getPostBySlug(slug)
   // const currentUser = await getCurrentUser()
 
