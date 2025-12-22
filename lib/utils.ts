@@ -6,6 +6,7 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export function formatDate(dateString: string): string {
+  console.log('dateString======>',dateString)
   const date = new Date(dateString)
   return new Intl.DateTimeFormat("zh-CN", {
     year: "numeric",
