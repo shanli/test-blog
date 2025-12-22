@@ -56,7 +56,7 @@ export default async function BlogPost({ params }: { params: { slug: string | un
   const res = await params;
   console.log('res===========>',res);
   const slug = 'test2-315126';
-  const post = await getPostBySlug(slug)
+  const post = await getPostBySlug(res.slug as string)
   const currentUser = await getCurrentUser()
   console.log('currentUser======>', currentUser);
   if (!post) {
