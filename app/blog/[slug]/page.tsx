@@ -62,7 +62,7 @@ export default async function BlogPost({ params }: { params: { slug: string | un
   }
 
   // // 如果文章不是公开的，并且用户未登录，则显示 404
-  if (!post.is_public) {
+  if (!post.is_public || !currentUser) {
     notFound()
   }
 
