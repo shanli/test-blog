@@ -56,13 +56,13 @@ export default async function BlogPost({ params }: { params: { slug: string | un
   const slug = 'test2-315126';
   const post = await getPostBySlug(slug)
   const currentUser = await getCurrentUser()
-  console.log('post======>', post);
+  console.log('currentUser======>', currentUser);
   if (!post) {
     notFound()
   }
 
   // // 如果文章不是公开的，并且用户未登录，则显示 404
-  if (!post.is_public || !currentUser) {
+  if (!post.is_public && !currentUser) {
     notFound()
   }
 
