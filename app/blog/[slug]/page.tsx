@@ -3,7 +3,7 @@ import { ArrowLeft } from "lucide-react"
 import { createServerClient } from "@/lib/connect"
 import type { Post } from "@/types"
 import { formatDate } from "@/lib/utils"
-import { notFound, useParams } from "next/navigation"
+import { notFound } from "next/navigation"
 import { CommentsSection } from "@/components/comments-section"
 import { EnhancedContent } from "@/components/enhanced-content"
 
