@@ -13,7 +13,7 @@ async function getPostBySlug(slug: string) {
   const supabase = createServerClient()
 
   // 首先获取文章
-  const { data: post, error } = await supabase.from("posts").select("*").eq("slug", slug).eq("published", true).single() // 
+  const { data: post, error } = await supabase.from("posts").select("*").eq("slug", slug)//.eq("published", true).single() // 
 
   if (error) {
     console.error("Error fetching post:", error)
