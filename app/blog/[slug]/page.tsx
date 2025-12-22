@@ -6,6 +6,7 @@ import { formatDate } from "@/lib/utils"
 import { notFound } from "next/navigation"
 import { CommentsSection } from "@/components/comments-section"
 import { EnhancedContent } from "@/components/enhanced-content"
+import { useParams } from 'next/navigation'
 
 export const revalidate = 60 // 每分钟重新验证页面
 
@@ -48,10 +49,10 @@ async function getCurrentUser() {
   return session?.user || null
 }
 
-export default async function BlogPost({ params }: { params: { slug: string } }) {
-
+export default async function BlogPost({ params }: { params: { slug: string | undefined } }) {
+  const {slug} = useParams() as any;
   // const { user, supabase } = useAuth()
-  const post = await getPostBySlug(params.slug)
+  const post = await getPostBySlug(slug)
   // const currentUser = await getCurrentUser()
 
   if (!post) {
