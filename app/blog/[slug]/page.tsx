@@ -41,13 +41,13 @@ async function getPostBySlug(slug: string) {
   } as Post
 }
 
-// async function getCurrentUser() {
-//   const supabase = createServerClient()
-//   const {
-//     data: { session },
-//   } = await supabase.auth.getSession()
-//   return session?.user || null
-// }
+async function getCurrentUser() {
+  const supabase = createServerClient()
+  const {
+    data: { session },
+  } = await supabase.auth.getSession()
+  return session?.user || null
+}
 
 export default async function BlogPost({ params }: { params: { slug: string | undefined } }) {
   // const {slug} = useParams() as any;
@@ -55,16 +55,16 @@ export default async function BlogPost({ params }: { params: { slug: string | un
   // const slug = (await params).slug as any;
   const slug = 'test2-315126';
   const post = await getPostBySlug(slug)
-  // const currentUser = await getCurrentUser()
+  const currentUser = await getCurrentUser()
   console.log('post======>', post);
   if (!post) {
     notFound()
   }
 
   // // 如果文章不是公开的，并且用户未登录，则显示 404
-  // if (!post.is_public) {
-  //   notFound()
-  // }
+  if (!post.is_public) {
+    notFound()
+  }
 
   // const author = post.author?.display_name || post.author?.username || "未知作者"
 
