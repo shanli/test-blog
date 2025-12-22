@@ -10,6 +10,7 @@ import type { InferGetStaticPropsType } from 'next'
 
 type AuthContextType = {
   user: User | null
+  supabase: any
   loading: boolean
   signIn: (
     email: string,
@@ -110,7 +111,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <AuthContext.Provider value={{ user, loading, signIn, signInWithGitHub, signUp, signOut }}>
+    <AuthContext.Provider value={{ user, loading, signIn, signInWithGitHub, signUp, signOut, supabase }}>
       {children}
     </AuthContext.Provider>
   )
