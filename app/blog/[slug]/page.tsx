@@ -14,7 +14,7 @@ async function getPostBySlug(slug: string) {
   console.log('supabase======>', supabase);
 
   // 首先获取文章
-  const { data: post, error } = await supabase.from("posts").select("*").eq("published", true).single() // 
+  const { data: post, error } = await supabase.from("posts").select("*").eq("slug", slug).single()//.eq("published", true).single() // 
   console.log('post======>', post);
   if (error) {
     console.error("Error fetching post:", error)
@@ -53,7 +53,7 @@ export default async function BlogPost({ params }: { params: { slug: string | un
   // const {slug} = useParams() as any;
   // const { user, supabase } = useAuth()
   // const slug = (await params).slug as any;
-  const slug = 'test3-615854';
+  const slug = 'test2-315126';
   const post = await getPostBySlug(slug)
   // const currentUser = await getCurrentUser()
   console.log('post======>', post);
@@ -62,9 +62,9 @@ export default async function BlogPost({ params }: { params: { slug: string | un
   }
 
   // // 如果文章不是公开的，并且用户未登录，则显示 404
-  if (!post.is_public) {
-    notFound()
-  }
+  // if (!post.is_public) {
+  //   notFound()
+  // }
 
   // const author = post.author?.display_name || post.author?.username || "未知作者"
 
