@@ -147,7 +147,7 @@ export default function CreateBlogPost() {
       if (published) {
         router.push(`/blog/${data[0].slug}`)
       } else {
-        router.push("/dashboard")
+        router.push("/blog")
       }
     } catch (error: any) {
       toast({

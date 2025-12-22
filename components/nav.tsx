@@ -66,7 +66,7 @@ export function Nav() {
                 <DropdownMenuLabel>{user.email || "用户"}</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem asChild>
-                  <Link href="/dashboard">控制面板</Link>
+                  <Link href="/blog">控制面板</Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
                   <Link href="/blog/create">创建文章</Link>
@@ -104,7 +104,7 @@ export function Nav() {
                 </Link>
                 {user ? (
                   <>
-                    <Link href="/dashboard" onClick={() => setIsOpen(false)} className="text-lg">
+                    <Link href="/blog" onClick={() => setIsOpen(false)} className="text-lg">
                       控制面板
                     </Link>
                     <Link href="/blog/create" onClick={() => setIsOpen(false)} className="text-lg">
