@@ -58,7 +58,6 @@ export default function EditBlogPost({ params }: { params: { id: string } }) {
           .select("*")
           .eq("id", id)
           .single()
-        console.log('postData=================>', postData);
         if (postError) {
           throw postError
         }

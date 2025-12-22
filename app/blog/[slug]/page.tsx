@@ -70,7 +70,7 @@ export default async function BlogPost({ params }: { params: { slug: string | un
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <Link href="/" className="inline-flex items-center text-muted-foreground hover:text-foreground mb-6">
+      <Link href="/blog" className="inline-flex items-center text-muted-foreground hover:text-foreground mb-6">
         <ArrowLeft className="mr-2 h-4 w-4" />
         返回首页
       </Link>
