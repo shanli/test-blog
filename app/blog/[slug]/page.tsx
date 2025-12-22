@@ -90,7 +90,7 @@ export default async function BlogPost({ params }: { params: { slug: string | un
 
         <EnhancedContent content={post.content} />
 
-        <CommentsSection postId={post.id} />
+        {/* <CommentsSection postId={post.id} /> */}
       </article>
     </div>
   )
