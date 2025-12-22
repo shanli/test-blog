@@ -11,6 +11,7 @@ export const revalidate = 60 // 每分钟重新验证页面
 
 async function getPostBySlug(slug: string) {
   const supabase = createServerClient()
+  console.log('supabase======>', supabase);
 
   // 首先获取文章
   const { data: post, error } = await supabase.from("posts").select("*").eq("slug", slug).single()//.eq("published", true).single() // 
@@ -40,13 +41,13 @@ async function getPostBySlug(slug: string) {
   } as Post
 }
 
-async function getCurrentUser() {
-  const supabase = createServerClient()
-  const {
-    data: { session },
-  } = await supabase.auth.getSession()
-  return session?.user || null
-}
+// async function getCurrentUser() {
+//   const supabase = createServerClient()
+//   const {
+//     data: { session },
+//   } = await supabase.auth.getSession()
+//   return session?.user || null
+// }
 
 export default async function BlogPost({ params }: { params: { slug: string | undefined } }) {
   // const {slug} = useParams() as any;
