@@ -33,14 +33,14 @@ export default function EditBlogPost({ params }: { params: { id: string } }) {
   const [visibility, setVisibility] = useState<"private" | "public">("private")
   const [isLoading, setIsLoading] = useState(true)
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [categories, setCategories] = useState<Category[]>([])
-  const [selectedCategories, setSelectedCategories] = useState<string[]>([])
+  // const [categories, setCategories] = useState<Category[]>([])
+  // const [selectedCategories, setSelectedCategories] = useState<string[]>([])
 
   const { user, supabase } = useAuth()
   const router = useRouter()
   const { toast } = useToast()
   // const supabase = createServerClient()
-
+  console.log('params===========>', params)
   useEffect(() => {
     if (!user) {
       router.push("/login")
